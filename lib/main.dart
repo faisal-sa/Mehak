@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: AppTheme.getTheme(isDark),
-            home: const SplashScreen(),
+            home: const HomeScreen(),
           );
         },
       ),

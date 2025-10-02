@@ -14,14 +14,15 @@ class AppTheme {
   static final Color red = Color(0xffff666a);
   static final Color yellow = Color(0xffffb538);
   static final Color blue = Color(0xff01c7dc);
-  static final Color green = Color(0xff23b48d);
-  static final Color grey = Color(0xffc4c4c4);
+  static final Color green = Color(0xff1a876a);
+  static final Color grey = Color(0xff9e9e9e);
   static final Color lightPurple = Color(0xff2f0066);
   static final Color neon = Color(0xff8c62d4);
   static ThemeData getTheme(bool isDark) {
     return ThemeData(
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
+
         selectedItemColor: isDark ? white : purple,
         unselectedItemColor: isDark ? neon : Colors.grey,
         showUnselectedLabels: true,
