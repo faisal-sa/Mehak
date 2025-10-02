@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hackathon_project/main.dart';
 
 class AppTheme {
@@ -7,12 +9,12 @@ class AppTheme {
   );
 
   static final Color white = Colors.white;
-  static final Color black = Color(0xff1a0040);
+  static final Color black = Color(0xff252632);
   static final Color purple = Color(0xff7a15ff);
   static final Color red = Color(0xffff666a);
   static final Color yellow = Color(0xffffb538);
   static final Color blue = Color(0xff01c7dc);
-  static final Color green = Color(0xff5cdb63);
+  static final Color green = Color(0xff23b48d);
   static final Color grey = Color(0xffc4c4c4);
   static final Color lightPurple = Color(0xff2f0066);
   static final Color neon = Color(0xff8c62d4);
@@ -38,20 +40,52 @@ class AppTheme {
         ),
       ),
       textTheme: TextTheme(
-        titleLarge: TextStyle(
+        headlineLarge: GoogleFonts.ibmPlexSansArabic(
           fontWeight: FontWeight.bold,
-          fontSize: 32,
+          fontSize: 32.w,
           color: isDark ? white : black,
         ),
-        bodyLarge: TextStyle(
+        headlineMedium: GoogleFonts.ibmPlexSansArabic(
+          fontWeight: FontWeight.bold,
+          fontSize: 24.w,
+
+          color: isDark ? white : black,
+        ),
+        headlineSmall: GoogleFonts.ibmPlexSansArabic(
+          fontWeight: FontWeight.bold,
+          fontSize: 20.w,
+
+          color: isDark ? white : black,
+        ),
+        titleMedium: GoogleFonts.ibmPlexSansArabic(
           fontWeight: FontWeight.w500,
-          fontSize: 26,
+          fontSize: 18.w,
+
           color: isDark ? white : black,
         ),
-        titleMedium: TextStyle(
-          fontWeight: FontWeight.w300,
-          fontSize: 24,
+        bodyLarge: GoogleFonts.ibmPlexSansArabic(
+          fontSize: 16.w,
+
           color: isDark ? white : black,
+        ),
+        bodyMedium: GoogleFonts.ibmPlexSansArabic(
+          fontSize: 14.w,
+
+          color: isDark ? white : black,
+        ),
+        bodySmall: GoogleFonts.ibmPlexSansArabic(
+          fontSize: 12.w,
+
+          color: isDark ? white : black,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          textStyle: GoogleFonts.ibmPlexSansArabic(
+            fontSize: 16.w,
+
+            color: isDark ? white : black,
+          ),
         ),
       ),
     );

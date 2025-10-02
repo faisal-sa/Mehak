@@ -1,1 +1,11 @@
-{}
+{
+  "intro1": "Welcome to Mahk",
+  "intro1_description": "Discover the perfect place for your project easily and smartly",
+  "intro2": "Safety",
+  "intro2_description": "Everything about neighborhood safety, growth rates, all in one map",
+  "intro3": "Opportunities",
+  "intro3_description": "Smarter recommendations ... clearer opportunities powered by AI",
+  "boarding_start_button":"Start Now"
+,"boarding_next_button":"Next"
+,"boarding_skip_button":"Skip"
+}
