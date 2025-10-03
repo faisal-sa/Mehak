@@ -1,14 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/feature/home/widget/custom_google_map.dart';
-import 'package:hackathon_project/main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -140,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          CustomGoogleMap(kGooglePlex: _kGooglePlex, controller: _controller),
+          // CustomGoogleMap(kGooglePlex: _kGooglePlex, controller: _controller),
           Align(
             alignment: AlignmentGeometry.bottomCenter,
             child: ScrollableSheet(),
@@ -151,13 +148,79 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class EstateCard extends StatelessWidget {
+  const EstateCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 8.h),
+          child: Container(
+            width: 262.w,
+            height: 201.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16.r),
+                bottomRight: Radius.circular(16.r),
+              ),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(16.0.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("نوع العقار"),
+
+                      SvgPicture.asset("assets/images/Archive_add.svg"),
+                    ],
+                  ),
+                  Text("اسم الشارع , اسم الحي"),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Chip(label: Text("القيمة منخفضة")),
+                      Text("0000"),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(top: 8.h),
+            child: Container(
+              height: 201.h,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16.r),
+                  bottomLeft: Radius.circular(16.r),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ScrollableSheet extends StatelessWidget {
   const ScrollableSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300.h,
+      height: 500.h,
       child: DraggableScrollableSheet(
         initialChildSize: 0.2, // Start size (20% of screen)
         minChildSize: 0.1, // Minimum size
@@ -188,10 +251,9 @@ class ScrollableSheet extends StatelessWidget {
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: 30,
-                    itemBuilder: (context, index) => ListTile(
-                      tileColor: Colors.white,
-
-                      title: Text("Item $index"),
+                    itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: EstateCard(),
                     ),
                   ),
                 ),
