@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hackathon_project/common/app_theme.dart';
+import 'package:hackathon_project/common/context_extension.dart';
+import 'package:hackathon_project/feature/card_details/screen/card_details_screen.dart';
 import 'package:hackathon_project/feature/home/widget/custom_google_map.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,107 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
-      appBar: AppBar(
-        toolbarHeight: 82.h,
-        backgroundColor: Colors.white,
-        leading: Padding(
-          padding: EdgeInsetsGeometry.symmetric(vertical: 16.h),
-          child: SizedBox(
-            width: 58.w,
-            height: 58.h,
-            child: Card(
-              color: Colors.white,
-              elevation: 1,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(50),
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: SvgPicture.asset("assets/images/Search.svg"),
-              ),
-            ),
-          ),
-        ),
-        title: SizedBox(
-          width: MediaQuery.widthOf(context),
-          height: 58.h,
-          child: Card(
-            color: Colors.white,
-            elevation: 1,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(16.r),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Row(
-                children: [
-                  SvgPicture.asset("assets/images/filter.svg"),
-                  Spacer(),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("الرياض"), Text("ايجار, شقة")],
-                  ),
-                  SvgPicture.asset("assets/images/Arrow.svg"),
-                ],
-              ),
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(vertical: 16.h),
-            child: SizedBox(
-              width: 58.w,
-              height: 58.h,
-              child: Card(
-                color: Colors.white,
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(50),
-                ),
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: SvgPicture.asset("assets/images/Notifications.svg"),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: SizedBox(
-        height: 137.h,
-
-        child: BottomNavigationBar(
-          iconSize: 32.w,
-          backgroundColor: Colors.white,
-          selectedItemColor: AppTheme.green,
-          unselectedItemColor: AppTheme.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                "assets/images/home.svg",
-                colorFilter: ColorFilter.mode(
-                  Color(0xff198065),
-                  BlendMode.srcIn,
-                ),
-              ),
-              label: "الرئيسية",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/images/archive.svg"),
-              label: "المفضلة",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/images/messages.svg"),
-              label: "الرسائل",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/images/Users.svg"),
-              label: "الحساب",
-            ),
-          ],
-        ),
-      ),
       body: Stack(
         children: [
           // CustomGoogleMap(kGooglePlex: _kGooglePlex, controller: _controller),
@@ -147,6 +48,143 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class ScrollableSheet extends StatelessWidget {
+  const ScrollableSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      // --- FIX 1: Adjusted sheet sizes ---
+      // This initial size is enough to show the handle and the top of the first card.
+      initialChildSize: 0.28,
+      // A smaller min size to ensure only the handle area is visible when collapsed.
+      minChildSize: 0.04,
+      maxChildSize:
+          0.99, // Usually best to not go fully to 1.0 to not cover status bar
+      snap: true,
+      snapSizes: const [
+        0.05,
+        0.5,
+        0.9,
+      ], // Snap points for collapsed, half, and full
+      // The builder provides the scrollController that MUST be attached to your scrollable view
+      builder: (context, scrollController) {
+        // --- FIX 2: Make the entire sheet content a single scrollable list ---
+        // This ensures dragging works on the handle, not just the cards.
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+          ),
+          // We use a ListView to contain BOTH the handle and the content.
+          // This makes the whole area scrollable and thus draggable.
+          child: ListView.builder(
+            // IMPORTANT: Connect the controller here!
+            controller: scrollController,
+            // Add 1 to the item count for our custom handle widget
+            itemCount: 31, // 30 cards + 1 handle
+            itemBuilder: (context, index) {
+              // The first item (index 0) is the handle
+              if (index == 0) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(
+                    child: Container(
+                      width: 60,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                );
+              }
+              // The rest of the items are your EstateCards
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CardDetailsScreen(),
+                    ),
+                  ),
+                  // We subtract 1 from the index because index 0 was the handle
+                  child: const EstateCard(),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+// class ScrollableSheet extends StatelessWidget {
+//   const ScrollableSheet({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return DraggableScrollableSheet(
+//       initialChildSize: 0.25,
+//       minChildSize: 0.1,
+//       maxChildSize: 1.0,
+//       snap: true,
+//       builder: (context, scrollController) {
+//         return Container(
+//           decoration: const BoxDecoration(
+//             color: Colors.white,
+//             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+//             boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+//           ),
+//           child: Column(
+//             children: [
+//               // This is your draggable handle
+//               Padding(
+//                 padding: const EdgeInsets.symmetric(vertical: 10.0),
+//                 child: Container(
+//                   width:
+//                       60, // Using .w can cause issues if ScreenUtil isn't initialized
+//                   height:
+//                       4, // Using .h can cause issues if ScreenUtil isn't initialized
+//                   decoration: BoxDecoration(
+//                     color: Colors.grey[400],
+//                     borderRadius: BorderRadius.circular(2),
+//                   ),
+//                 ),
+//               ),
+//               // Your scrollable content
+//               Expanded(
+//                 child: ListView.builder(
+//                   // IMPORTANT: Pass the scrollController to your scrollable content
+//                   controller: scrollController,
+//                   itemCount: 30,
+//                   itemBuilder: (context, index) => Padding(
+//                     padding: EdgeInsets.symmetric(
+//                       horizontal: 16,
+//                     ), // Use static values or MediaQuery
+//                     child: InkWell(
+//                       onTap: () => Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => CardDetailsScreen(),
+//                         ),
+//                       ),
+//                       child: EstateCard(),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
 
 class EstateCard extends StatelessWidget {
   const EstateCard({super.key});
@@ -175,18 +213,53 @@ class EstateCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("نوع العقار"),
+                      Text(
+                        "محل للتقبيل",
+                        style: context.headlineSmall!.copyWith(
+                          color: Colors.black,
+                        ),
+                      ),
 
                       SvgPicture.asset("assets/images/Archive_add.svg"),
                     ],
                   ),
-                  Text("اسم الشارع , اسم الحي"),
+                  Text(
+                    "الدمام , حي البادية",
+                    style: context.bodyLarge!.copyWith(
+                      color: Color(0xff545454),
+                    ),
+                  ),
                   Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Chip(label: Text("القيمة منخفضة")),
-                      Text("0000"),
+                      Chip(
+                        backgroundColor: Color(0xffa33838),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide.none,
+                          borderRadius: BorderRadiusGeometry.circular(8.r),
+                        ),
+                        label: Text(
+                          "القيمة منخفضة",
+                          style: context.bodySmall!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.white,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "117,100",
+                            style: context.bodyLarge!.copyWith(
+                              color: AppTheme.green,
+                              fontSize: 17.w,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SvgPicture.asset("assets/images/SRS.svg"),
+                        ],
+                      ),
                     ],
                   ),
                 ],
@@ -200,7 +273,10 @@ class EstateCard extends StatelessWidget {
             child: Container(
               height: 201.h,
               decoration: BoxDecoration(
-                color: Colors.red,
+                image: DecorationImage(
+                  image: AssetImage("assets/images/house1.png"),
+                  fit: BoxFit.fill,
+                ),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16.r),
                   bottomLeft: Radius.circular(16.r),
@@ -214,57 +290,6 @@ class EstateCard extends StatelessWidget {
   }
 }
 
-class ScrollableSheet extends StatelessWidget {
-  const ScrollableSheet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500.h,
-      child: DraggableScrollableSheet(
-        initialChildSize: 0.2, // Start size (20% of screen)
-        minChildSize: 0.1, // Minimum size
-        maxChildSize: 0.8, // Maximum size
-        builder: (context, scrollController) {
-          return Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
-            ),
-            child: Column(
-              children: [
-                // Small bar at the top
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Container(
-                    width: 60.w,
-                    height: 4.h,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                // List content
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: 30,
-                    itemBuilder: (context, index) => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: EstateCard(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
 
 
 
