@@ -5,10 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/common/context_extension.dart';
 import 'package:hackathon_project/feature/home/screen/home_screen.dart';
+import 'package:hackathon_project/feature/navigation/screen/navigation_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingScreen extends StatefulWidget {
-  BoardingScreen({super.key});
+  const BoardingScreen({super.key});
 
   @override
   State<BoardingScreen> createState() => _BoardingScreenState();
@@ -32,33 +33,39 @@ class _BoardingScreenState extends State<BoardingScreen> {
 
         children: [
           SizedBox(
-            height: 586.h,
+            height: 600.h,
 
             child: PageView(
+              reverse: false,
               controller: _controller,
               onPageChanged: (index) {
                 setState(() => _currentPage = index);
               },
               children: [
                 IntroCard(
-                  path: "assets/images/boarding1.svg",
-                  text: 'intro1'.tr(),
-                  description: 'intro1_description'.tr(),
-                ),
-                IntroCard(
-                  path: "assets/images/boarding2.svg",
-                  text: 'intro2'.tr(),
-                  description: 'intro2_description'.tr(),
-                ),
-                IntroCard(
                   path: "assets/images/boarding3.svg",
-                  text: 'intro3'.tr(),
-                  description: 'intro3_description'.tr(),
+                  text: 'مرحبًا بك في ',
+                  hasSVG: true,
+                  description: 'اكتشف المكان المثالي لمشروعك بسهوله وذكاء !',
+                ),
+                IntroCard(
+                  hasSVG: false,
+                  isPng: true,
+                  path: "assets/images/boarding2.svg",
+                  text: 'الأمان',
+                  description:
+                      'كل شيء عن أمان الحي، معدل النمو، في خريطة\n واحدة',
+                ),
+                IntroCard(
+                  hasSVG: false,
+                  path: "assets/images/boarding1.svg",
+                  text: 'الفرص',
+                  description: 'توصيات أذكى ... فرص أوضح بدعم الذكاء الاصطناعي',
                 ),
               ],
             ),
           ),
-          SizedBox(height: 104.h),
+          SizedBox(height: 32.h),
           SmoothPageIndicator(
             controller: _controller,
             count: 3,
@@ -76,7 +83,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
           if (_currentPage != 2) ...[
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30).w,
-              child: Row(
+              child: Column(
+                spacing: 8,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
@@ -84,30 +92,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
-                      backgroundColor: AppTheme.grey,
-                      fixedSize: Size(101.w, 46.h),
-                    ),
-                    onPressed: () {
-                      if (_controller.page == 2) {
-                      } else {
-                        _controller.nextPage(
-                          duration: Duration(milliseconds: 400),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    },
-                    child: Text(
-                      "boarding_skip_button".tr(),
-                      style: context.bodyLarge,
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
                       backgroundColor: AppTheme.green,
-                      fixedSize: Size(101.w, 46.h),
+                      fixedSize: Size(MediaQuery.widthOf(context), 46.h),
                     ),
                     onPressed: () {
                       if (_controller.page == 2) {
@@ -124,42 +110,83 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     },
                     child: Text(
                       "boarding_next_button".tr(),
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontWeight: FontWeight.w400,
+                        height: 1.50,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      backgroundColor: const Color(0xFFEAEBF4),
+
+                      fixedSize: Size(MediaQuery.widthOf(context), 46.h),
+                    ),
+                    onPressed: () {
+                      if (_controller.page == 2) {
+                      } else {
+                        _controller.nextPage(
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
+                    child: Text(
+                      "boarding_skip_button".tr(),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontWeight: FontWeight.w400,
+                        height: 1.50,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ] else
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30).w,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  backgroundColor: const Color(0xFF23B48D),
+                  fixedSize: Size(MediaQuery.widthOf(context), 46.h),
                 ),
-                backgroundColor: AppTheme.green,
-                fixedSize: Size(
-                  MediaQuery.widthOf(context) * 0.82,
-                  MediaQuery.heightOf(context) * 0.06,
+                onPressed: () {
+                  if (_controller.page == 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NavigationScreen(),
+                      ),
+                    );
+                  } else {
+                    _controller.nextPage(
+                      duration: Duration(milliseconds: 400),
+                      curve: Curves.easeInOut,
+                    );
+                  }
+                },
+                child: Text(
+                  (_currentPage == 2) ? "التالي" : "boarding_start_button".tr(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontFamily: 'IBM Plex Sans Arabic',
+                    fontWeight: FontWeight.w400,
+                    height: 1.50,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                if (_controller.page == 2) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
-                } else {
-                  _controller.nextPage(
-                    duration: Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                  );
-                }
-              },
-              child: Text(
-                (_currentPage == 2)
-                    ? "Let's Start"
-                    : "boarding_start_button".tr(),
-                style: TextStyle(color: Colors.white),
               ),
             ),
           SizedBox(height: 77.h),
@@ -173,12 +200,16 @@ class IntroCard extends StatelessWidget {
   final String path;
   final String text;
   final String description;
+  final bool hasSVG;
+  bool isPng = false;
 
-  const IntroCard({
+  IntroCard({
     super.key,
     required this.path,
     required this.text,
     required this.description,
+    required this.hasSVG,
+    this.isPng = false,
   });
 
   @override
@@ -188,17 +219,50 @@ class IntroCard extends StatelessWidget {
       elevation: 0,
       child: Column(
         children: [
-          SvgPicture.asset(
-            path,
-            height: 395.h,
-            width: 402.w,
-            clipBehavior: Clip.none,
-            fit: BoxFit.cover,
+          isPng
+              ? Image.asset(
+                  "assets/images/boarding2.png",
+                  fit: BoxFit.fill,
+                  height: 395.h,
+                  width: 402.w,
+                )
+              : SvgPicture.asset(
+                  path,
+                  height: 395.h,
+                  width: 402.w,
+                  clipBehavior: Clip.none,
+                  fit: BoxFit.cover,
+                ),
+          SizedBox(height: 32.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontWeight: FontWeight.w700,
+                  height: 1.15,
+                ),
+              ),
+              if (hasSVG) SvgPicture.asset("assets/images/mahak.svg"),
+            ],
           ),
-          SizedBox(height: 61.h),
-          Text(text, style: context.bodyMedium),
           SizedBox(height: 31.h),
-          Text(description, style: context.bodyMedium),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+
+            style: TextStyle(
+              color: const Color(0xFF555555),
+              fontSize: 18,
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontWeight: FontWeight.w400,
+              height: 1.50,
+            ),
+          ),
         ],
       ),
     );

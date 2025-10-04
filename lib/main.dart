@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/feature/account/screen/account_screen.dart';
 import 'package:hackathon_project/feature/home/screen/home_screen.dart';
+import 'package:hackathon_project/feature/logo/logo/screen/splash_screen.dart';
 import 'package:hackathon_project/feature/navigation/screen/navigation_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: AppTheme.getTheme(isDark),
-            home: const NavigationScreen(),
+            home: const SplashScreen(),
           );
         },
       ),

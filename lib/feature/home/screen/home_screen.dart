@@ -7,7 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/common/context_extension.dart';
 import 'package:hackathon_project/feature/card_details/screen/card_details_screen.dart';
+import 'package:hackathon_project/feature/home/controller/estate_cards.dart';
 import 'package:hackathon_project/feature/home/widget/custom_google_map.dart';
+import 'package:hackathon_project/feature/home/widget/estate_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class ScrollableSheet extends StatelessWidget {
-  const ScrollableSheet({super.key});
+  ScrollableSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,7 @@ class ScrollableSheet extends StatelessWidget {
             // IMPORTANT: Connect the controller here!
             controller: scrollController,
             // Add 1 to the item count for our custom handle widget
-            itemCount: 31, // 30 cards + 1 handle
+            itemCount: 4, // 30 cards + 1 handle
             itemBuilder: (context, index) {
               // The first item (index 0) is the handle
               if (index == 0) {
@@ -112,8 +114,14 @@ class ScrollableSheet extends StatelessWidget {
                       builder: (context) => const CardDetailsScreen(),
                     ),
                   ),
-                  // We subtract 1 from the index because index 0 was the handle
-                  child: const EstateCard(),
+                  child: EstateCard(
+                    title: estateCards[index][0],
+                    massageTitle: estateCards[index][1],
+                    value: estateCards[index][2],
+                    valueColor: estateCards[index][3],
+                    price: estateCards[index][4],
+                    image: estateCards[index][5],
+                  ),
                 ),
               );
             },
@@ -186,109 +194,109 @@ class ScrollableSheet extends StatelessWidget {
 //   }
 // }
 
-class EstateCard extends StatelessWidget {
-  const EstateCard({super.key});
+// class EstateCard extends StatelessWidget {
+//   const EstateCard({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: 8.h),
-          child: Container(
-            width: 262.w,
-            height: 201.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(16.r),
-                bottomRight: Radius.circular(16.r),
-              ),
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(16.0.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "محل للتقبيل",
-                        style: context.headlineSmall!.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Padding(
+//           padding: EdgeInsets.only(top: 8.h),
+//           child: Container(
+//             width: 262.w,
+//             height: 201.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.only(
+//                 topRight: Radius.circular(16.r),
+//                 bottomRight: Radius.circular(16.r),
+//               ),
+//               color: Colors.white,
+//             ),
+//             child: Padding(
+//               padding: EdgeInsets.all(16.0.w),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text(
+//                         "محل للتقبيل",
+//                         style: context.headlineSmall!.copyWith(
+//                           color: Colors.black,
+//                         ),
+//                       ),
 
-                      SvgPicture.asset("assets/images/Archive_add.svg"),
-                    ],
-                  ),
-                  Text(
-                    "الدمام , حي البادية",
-                    style: context.bodyLarge!.copyWith(
-                      color: Color(0xff545454),
-                    ),
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Chip(
-                        backgroundColor: Color(0xffa33838),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide.none,
-                          borderRadius: BorderRadiusGeometry.circular(8.r),
-                        ),
-                        label: Text(
-                          "القيمة منخفضة",
-                          style: context.bodySmall!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.white,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "117,100",
-                            style: context.bodyLarge!.copyWith(
-                              color: AppTheme.green,
-                              fontSize: 17.w,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SvgPicture.asset("assets/images/SRS.svg"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(top: 8.h),
-            child: Container(
-              height: 201.h,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/house1.png"),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.r),
-                  bottomLeft: Radius.circular(16.r),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//                       SvgPicture.asset("assets/images/Archive_add.svg"),
+//                     ],
+//                   ),
+//                   Text(
+//                     "الدمام , حي البادية",
+//                     style: context.bodyLarge!.copyWith(
+//                       color: Color(0xff545454),
+//                     ),
+//                   ),
+//                   Spacer(),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Chip(
+//                         backgroundColor: Color(0xffa33838),
+//                         shape: RoundedRectangleBorder(
+//                           side: BorderSide.none,
+//                           borderRadius: BorderRadiusGeometry.circular(8.r),
+//                         ),
+//                         label: Text(
+//                           "القيمة منخفضة",
+//                           style: context.bodySmall!.copyWith(
+//                             fontWeight: FontWeight.bold,
+//                             color: AppTheme.white,
+//                           ),
+//                         ),
+//                       ),
+//                       Row(
+//                         children: [
+//                           Text(
+//                             "117,100",
+//                             style: context.bodyLarge!.copyWith(
+//                               color: AppTheme.green,
+//                               fontSize: 17.w,
+//                               fontWeight: FontWeight.bold,
+//                             ),
+//                           ),
+//                           SvgPicture.asset("assets/images/SRS.svg"),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//         Expanded(
+//           child: Padding(
+//             padding: EdgeInsets.only(top: 8.h),
+//             child: Container(
+//               height: 201.h,
+//               decoration: BoxDecoration(
+//                 image: DecorationImage(
+//                   image: AssetImage("assets/images/house1.png"),
+//                   fit: BoxFit.fill,
+//                 ),
+//                 borderRadius: BorderRadius.only(
+//                   topLeft: Radius.circular(16.r),
+//                   bottomLeft: Radius.circular(16.r),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 
 

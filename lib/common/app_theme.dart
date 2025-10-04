@@ -128,4 +128,14 @@ class AppTheme {
       ),
     );
   }
+
+  ButtonStyle secondaryButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: white,
+    fixedSize: Size(408.w, 58.h),
+    textStyle: TextStyle(fontSize: 16, color: black),
+    side: BorderSide(width: 1.0, color: grey),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadiusGeometry.circular(8),
+    ),
+  );
 }
