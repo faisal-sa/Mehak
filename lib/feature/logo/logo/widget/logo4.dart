@@ -1,4 +1,4 @@
-import 'dart:ui' as ui;
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 
@@ -36,9 +36,9 @@ class Logo4 extends CustomPainter {
     path_0.cubicTo(240.743, 51.3907, 239.373, 52.6622, 237.898, 54.0397);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff23B48D).withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = Color(0xff23B48D).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
     path_1.moveTo(161.619, 40.1589);
@@ -128,9 +128,9 @@ class Logo4 extends CustomPainter {
     path_1.lineTo(153.19, 54.0397);
     path_1.close();
 
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = Colors.white.withOpacity(1.0);
-    canvas.drawPath(path_1, paint_1_fill);
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = Colors.white.withOpacity(1.0);
+    canvas.drawPath(path_1, paint1Fill);
   }
 
   @override

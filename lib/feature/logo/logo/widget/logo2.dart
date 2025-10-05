@@ -1,8 +1,7 @@
-import 'dart:ui' as ui;
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 
-//Copy this CustomPainter code to the Bottom of the File
 class Logo2 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -36,9 +35,9 @@ class Logo2 extends CustomPainter {
     path_0.cubicTo(87.2444, 76.96, 85.1762, 78.88, 82.9489, 80.96);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff23B48D).withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = Color(0xff23B48D).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,62 +22,76 @@ class _HomeAppBarState extends State<HomeAppBar> {
   OverlayEntry? _overlayEntry;
   double _overlayHeight = 200;
 
-  // Pass a customWidget to be displayed inside the overlay
   OverlayEntry _buildOverlayEntry({required Widget customWidget}) {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return OverlayEntry(
-      builder: (context) => Positioned(
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: _overlayHeight,
-        child: Material(
-          elevation: 12,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-          child: GestureDetector(
-            onVerticalDragUpdate: (details) {
-              _overlayHeight = (_overlayHeight - details.delta.dy).clamp(
-                200.0,
-                screenHeight * 0.9,
-              );
-              _overlayEntry?.markNeedsBuild();
-            },
-            onVerticalDragEnd: (details) {
-              // Snap to full or close depending on drag velocity/height
-              if (_overlayHeight < 250) {
-                _removeOverlay();
-              } else if (_overlayHeight > screenHeight * 0.6) {
-                _overlayHeight = screenHeight * 0.9; // expand fully
-                _overlayEntry?.markNeedsBuild();
-              } else {
-                _overlayHeight = 300; // default middle height
-                _overlayEntry?.markNeedsBuild();
-              }
-            },
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      builder: (context) => Stack(
+        children: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: _removeOverlay,
+            child: Container(color: Colors.black.withOpacity(0.3)),
+          ),
+
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: _overlayHeight,
+            child: Material(
+              elevation: 12,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
               ),
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.only(bottom: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
-                      borderRadius: BorderRadius.circular(2),
+              child: GestureDetector(
+                onVerticalDragUpdate: (details) {
+                  _overlayHeight = (_overlayHeight - details.delta.dy).clamp(
+                    200.0,
+                    screenHeight * 0.9,
+                  );
+                  _overlayEntry?.markNeedsBuild();
+                },
+                onVerticalDragEnd: (details) {
+                  if (_overlayHeight < 250) {
+                    _removeOverlay();
+                  } else if (_overlayHeight > screenHeight * 0.6) {
+                    _overlayHeight = screenHeight * 0.9;
+                    _overlayEntry?.markNeedsBuild();
+                  } else {
+                    _overlayHeight = 300;
+                    _overlayEntry?.markNeedsBuild();
+                  }
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(16),
                     ),
                   ),
-                  Expanded(child: SingleChildScrollView(child: customWidget)),
-                ],
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.black38,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(child: customWidget),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

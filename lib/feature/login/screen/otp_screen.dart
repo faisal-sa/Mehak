@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_project/feature/home/screen/home_screen.dart';
+import 'package:hackathon_project/feature/navigation/screen/navigation_screen.dart';
 import 'package:pinput/pinput.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 
@@ -67,18 +67,38 @@ class _OtpScreenState extends State<OtpScreen> {
 
             SizedBox(
               width: double.infinity,
-              child: Pinput(
-                length: 4,
-                onCompleted: (value) {
-                  otpCode = value;
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Pinput(
+                  defaultPinTheme: PinTheme(
+                    width: 96,
+                    height: 67,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: BoxBorder.all(
+                        color: Colors.black.withValues(alpha: 0.20),
+                        width: 1,
+                      ),
+                    ),
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontWeight: FontWeight.w700,
+                      height: 1.50,
+                    ),
+                  ),
+                  length: 4,
+                  onCompleted: (value) {
+                    otpCode = value;
 
-                  // تحقق تلقائي
-                  if (otpCode == "1234") {
-                    _showSuccessDialog(context);
-                  } else {
-                    _showFailureDialog(context);
-                  }
-                },
+                    if (otpCode == "1234") {
+                      _showSuccessDialog(context);
+                    } else {
+                      _showFailureDialog(context);
+                    }
+                  },
+                ),
               ),
             ),
 
@@ -152,10 +172,25 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF23B48D),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontWeight: FontWeight.w400,
+                  height: 1.50,
+                ),
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => NavigationScreen(signedin: true),
+                  ),
                 );
               },
               child: const Text(
@@ -197,6 +232,19 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF23B48D),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontWeight: FontWeight.w400,
+                  height: 1.50,
+                ),
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },

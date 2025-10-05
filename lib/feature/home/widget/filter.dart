@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/common/context_extension.dart';
 
 class Filter extends StatefulWidget {
@@ -107,7 +108,7 @@ class _FilterState extends State<Filter> {
                     side: BorderSide(color: Color(0xff23b48d)),
                     backgroundColor: Color(0xffe9f8f4),
                     label: SizedBox(
-                      width: MediaQuery.widthOf(context) * 0.15,
+                      width: MediaQuery.widthOf(context) * 0.10,
 
                       child: Center(
                         child: Text(
@@ -123,10 +124,10 @@ class _FilterState extends State<Filter> {
                   Container(width: 1.w, height: 45.h, color: Colors.grey),
 
                   Chip(
-                    side: BorderSide(color: Colors.white), //Color(0xff23b48d)),
-                    backgroundColor: Colors.white, // Color(0xffe9f8f4),
+                    side: BorderSide(color: Colors.white),
+                    backgroundColor: Colors.white,
                     label: SizedBox(
-                      width: MediaQuery.widthOf(context) * 0.15,
+                      width: MediaQuery.widthOf(context) * 0.10,
 
                       child: Center(
                         child: Text(
@@ -144,7 +145,7 @@ class _FilterState extends State<Filter> {
                     side: BorderSide(color: Colors.white),
                     backgroundColor: Colors.white,
                     label: SizedBox(
-                      width: MediaQuery.widthOf(context) * 0.15,
+                      width: MediaQuery.widthOf(context) * 0.10,
 
                       child: Center(
                         child: Text(

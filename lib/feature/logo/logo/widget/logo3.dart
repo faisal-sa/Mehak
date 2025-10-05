@@ -1,4 +1,4 @@
-import 'dart:ui' as ui;
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 
@@ -36,9 +36,9 @@ class Logo3 extends CustomPainter {
     path_0.cubicTo(57.6657, 51.3067, 56.2952, 52.5867, 54.8193, 53.9733);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff23B48D).withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = Color(0xff23B48D).withOpacity(1.0);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

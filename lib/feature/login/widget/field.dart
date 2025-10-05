@@ -1,6 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackathon_project/common/context_extension.dart';
 
 class Field extends StatelessWidget {
@@ -13,12 +11,12 @@ class Field extends StatelessWidget {
     this.borderColor,
     this.prefixIcon,
     this.suffixIcon,
-    required this.labeltext,
+    this.labeltext,
     this.fillColor,
   });
-  final Widget? label;
-  final String labeltext;
 
+  final Widget? label;
+  final String? labeltext;
   final Widget? hint;
   final double radius;
   final double? borderWidth;
@@ -30,6 +28,7 @@ class Field extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -38,13 +37,7 @@ class Field extends StatelessWidget {
         hint: hint,
         label: label,
         labelText: labeltext,
-        labelStyle: TextStyle(
-          color: Colors.black.withValues(alpha: 0.60),
-          fontSize: 18,
-          fontFamily: 'IBM Plex Sans Arabic',
-          fontWeight: FontWeight.w400,
-          height: 1.50,
-        ),
+        labelStyle: context.displaySmall,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(radius)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius),
@@ -60,10 +53,6 @@ class Field extends StatelessWidget {
             width: borderWidth ?? 1,
           ),
         ),
-        /* contentPadding: EdgeInsets.symmetric(
-          horizontal: 58.h,
-        ), */
-        // Adjust vertical padding
       ),
     );
   }

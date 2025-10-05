@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_project/common/app_theme.dart';
 import 'package:hackathon_project/common/context_extension.dart';
 
-class EstateCard extends StatelessWidget {
+class EstateCard extends StatefulWidget {
   EstateCard({
     super.key,
     required this.title,
@@ -20,6 +20,13 @@ class EstateCard extends StatelessWidget {
   Color valueColor;
   String price;
   String image;
+
+  @override
+  State<EstateCard> createState() => _EstateCardState();
+}
+
+class _EstateCardState extends State<EstateCard> {
+  bool saved = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +53,27 @@ class EstateCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        title,
+                        widget.title,
                         style: context.headlineSmall!.copyWith(
                           color: Colors.black,
                         ),
                       ),
 
-                      SvgPicture.asset("assets/images/Archive_add.svg"),
+                      InkWell(
+                        onTap: () => setState(() {
+                          saved = !saved;
+                        }),
+                        child: SvgPicture.asset(
+                          "assets/images/Archive_add.svg",
+                          colorFilter: saved
+                              ? ColorFilter.mode(Colors.black, BlendMode.srcIn)
+                              : null,
+                        ),
+                      ),
                     ],
                   ),
                   Text(
-                    massageTitle,
+                    widget.massageTitle,
                     style: context.bodyLarge!.copyWith(
                       color: Color(0xff545454),
                     ),
@@ -66,13 +83,13 @@ class EstateCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Chip(
-                        backgroundColor: valueColor,
+                        backgroundColor: widget.valueColor,
                         shape: RoundedRectangleBorder(
                           side: BorderSide.none,
                           borderRadius: BorderRadiusGeometry.circular(8.r),
                         ),
                         label: Text(
-                          value,
+                          widget.value,
                           style: context.bodySmall!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppTheme.white,
@@ -82,7 +99,7 @@ class EstateCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            price,
+                            widget.price,
                             style: context.bodyLarge!.copyWith(
                               color: AppTheme.green,
                               fontSize: 17.w,
@@ -106,7 +123,7 @@ class EstateCard extends StatelessWidget {
               height: 201.h,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(image),
+                  image: AssetImage(widget.image),
                   fit: BoxFit.fill,
                 ),
                 borderRadius: BorderRadius.only(

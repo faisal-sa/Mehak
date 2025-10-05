@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hackathon_project/feature/boarding/screen/boarding_screen.dart';
-import 'package:hackathon_project/feature/home/screen/home_screen.dart';
 import 'package:hackathon_project/feature/logo/logo/controller/logo_controller.dart';
 
 class SplashScreen extends StatefulWidget {

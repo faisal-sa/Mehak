@@ -7,6 +7,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       elevation: 2.0,
       shadowColor: Colors.black.withAlpha(89),
       backgroundColor: Colors.white,

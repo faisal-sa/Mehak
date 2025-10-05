@@ -6,14 +6,11 @@ import 'package:hackathon_project/common/context_extension.dart';
 import 'package:hackathon_project/feature/login/screen/login_screen.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
-
+  AccountScreen({super.key, required this.signed});
+  bool signed;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SignInCard(),
-      //AccountSettings()
-    );
+    return Scaffold(body: signed ? AccountSettings() : SignInCard());
   }
 }
 
@@ -194,13 +191,28 @@ class SignInCard extends StatelessWidget {
                 ),
                 Spacer(),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFEAEBF4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
                   },
-                  child: Text("تسجيل الدخول"),
+                  child: Text(
+                    "تسجيل الدخول",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontFamily: 'IBM Plex Sans Arabic',
+                      fontWeight: FontWeight.w400,
+                      height: 1.50,
+                    ),
+                  ),
                 ),
               ],
             ),

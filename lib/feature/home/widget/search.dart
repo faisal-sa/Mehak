@@ -20,10 +20,11 @@ class Search extends StatelessWidget {
             color: Colors.white,
             elevation: 1,
             child: Field(
-              label: Text("ابحث", style: TextStyle(color: Colors.grey)),
               radius: 16.r,
+              fillColor: Colors.white,
               borderColor: Colors.transparent,
               suffixIcon: Icon(CupertinoIcons.search, color: Colors.grey),
+              labeltext: 'ابحث',
             ),
           ),
           SizedBox(height: 8.h),
@@ -112,7 +113,7 @@ class SuggestionChip extends StatelessWidget {
       side: BorderSide(color: Colors.transparent),
       backgroundColor: Color(0xffe9f8f4),
       label: SizedBox(
-        width: 46.w,
+        width: 36.w,
 
         child: Center(
           child: Text(

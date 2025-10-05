@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,8 +18,6 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
   bool _snap = false;
   bool _floating = false;
 
-  // [SliverAppBar]s are typically used in [CustomScrollView.slivers], which in
-  // turn can be placed in a [Scaffold.body].
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,11 +157,13 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
                           height: 120.h,
 
                           child: Padding(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(4),
                             child: Column(
                               spacing: 32.h,
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     SvgPicture.asset(
                                       "assets/images/space.svg",
@@ -340,6 +342,8 @@ class _CardDetailsScreenState extends State<CardDetailsScreen> {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  fixedSize: Size(48.w, 48.h),
+
                   backgroundColor: const Color(0xFF23B48D),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(

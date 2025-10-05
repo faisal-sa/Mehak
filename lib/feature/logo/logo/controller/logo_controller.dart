@@ -7,7 +7,6 @@ import 'package:hackathon_project/feature/logo/logo/widget/logo4.dart';
 class LogoController {
   int currentIndex = 0;
 
-  //the file index but we dont use it -like loop or something-
   final List<Widget> painters = [
     CustomPaint(size: Size(107, 96), painter: Logo1()),
     CustomPaint(size: Size(106, 96), painter: Logo2()),
