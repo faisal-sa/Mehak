@@ -1,7 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hackathon_project/common/context_extension.dart';
 
 class Field extends StatelessWidget {
   const Field({
@@ -60,10 +57,6 @@ class Field extends StatelessWidget {
             width: borderWidth ?? 1,
           ),
         ),
-        /* contentPadding: EdgeInsets.symmetric(
-          horizontal: 58.h,
-        ), */
-        // Adjust vertical padding
       ),
     );
   }

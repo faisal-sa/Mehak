@@ -3,8 +3,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_project/common/app_theme.dart';
-import 'package:hackathon_project/feature/boarding/widget/intro_card.dart';
 
 import 'package:hackathon_project/feature/navigation/screen/navigation_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -98,10 +98,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     ),
                     onPressed: () {
                       if (_controller.page == 2) {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => LoginScreen()),
-                        // );
                       } else {
                         _controller.nextPage(
                           duration: Duration(milliseconds: 400),
@@ -130,13 +126,13 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       fixedSize: Size(MediaQuery.widthOf(context), 46.h),
                     ),
                     onPressed: () {
-                      if (_controller.page == 2) {
-                      } else {
-                        _controller.nextPage(
-                          duration: Duration(milliseconds: 400),
-                          curve: Curves.easeInOut,
-                        );
-                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NavigationScreen(signedin: false),
+                        ),
+                      );
                     },
                     child: Text(
                       "boarding_skip_button".tr(),
@@ -191,6 +187,79 @@ class _BoardingScreenState extends State<BoardingScreen> {
               ),
             ),
           SizedBox(height: 77.h),
+        ],
+      ),
+    );
+  }
+}
+
+class IntroCard extends StatelessWidget {
+  final String path;
+  final String text;
+  final String description;
+  final bool hasSVG;
+  bool isPng = false;
+
+  IntroCard({
+    super.key,
+    required this.path,
+    required this.text,
+    required this.description,
+    required this.hasSVG,
+    this.isPng = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      elevation: 0,
+      child: Column(
+        children: [
+          isPng
+              ? Image.asset(
+                  "assets/images/boarding2.png",
+                  fit: BoxFit.fill,
+                  height: 395.h,
+                  width: 402.w,
+                )
+              : SvgPicture.asset(
+                  path,
+                  height: 395.h,
+                  width: 402.w,
+                  clipBehavior: Clip.none,
+                  fit: BoxFit.cover,
+                ),
+          SizedBox(height: 32.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontWeight: FontWeight.w700,
+                  height: 1.15,
+                ),
+              ),
+              if (hasSVG) SvgPicture.asset("assets/images/mahak.svg"),
+            ],
+          ),
+          SizedBox(height: 31.h),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+
+            style: TextStyle(
+              color: const Color(0xFF555555),
+              fontSize: 18,
+              fontFamily: 'IBM Plex Sans Arabic',
+              fontWeight: FontWeight.w400,
+              height: 1.50,
+            ),
+          ),
         ],
       ),
     );

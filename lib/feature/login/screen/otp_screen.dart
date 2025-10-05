@@ -30,7 +30,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 fontFamily: 'IBM Plex Sans Arabic',
                 fontWeight: FontWeight.w700,
                 height: 1.75,
-              ), // style: context.titleMedium,
+              ),
             ),
             const SizedBox(height: 16),
             Row(
@@ -102,10 +102,8 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
             ),
 
-            // ignore: avoid_print
             const SizedBox(height: 16),
 
-            // مؤقت + إعادة إرسال
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -120,9 +118,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    // إعادة إرسال الكود
-                  },
+                  onPressed: () {},
                   child: const Text(
                     "إعادة إرسال الرمز",
                     style: TextStyle(
