@@ -4,6 +4,10 @@ AI-powered real estate intelligence for urban planners, investors, and business 
 
 Mehak is a Flutter-based data analysis and AI application designed to help users evaluate real estate parcels and determine optimal business placements. It intelligently quantifies the economic and spatial value of a location using data fusion and machine learning.
 
+## Figma Design
+
+https://www.figma.com/design/I0NxdYZcf3fPT7AteGeRew/Mehak-project?node-id=0-1&t=xtTVH0cdp7Pd7uvX-1
+
 ## Goal Features
 
 - Smart Site Suitability
