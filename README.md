@@ -1,99 +1,108 @@
-# Mehak — Real Estate Data Analysis & AI
+🏙️ Mehak — Real Estate Data Analysis & AI
 
-Mehak is a Flutter-based data analysis and AI application that helps urban planners, investors, and business owners evaluate real estate and land parcels to determine the most suitable businesses to place at a location and to quantify the expected value contribution of a site.
+AI-powered real estate intelligence for urban planners, investors, and business owners.
 
-Goal Features
-- Smart site suitability: AI models that recommend suitable business categories for a given parcel (e.g., retail, café, clinic, co-working).
-- Value indicators: Numeric and visual indicators estimating potential value (footfall score, revenue potential index, visibility score, accessibility index).
-- Interactive maps: Map-based UI to inspect parcels, surrounding points of interest (POI), and indicator overlays.
-- Data fusion: Combines spatial data, POI, demographics, and local amenities for robust recommendations.
-- Multi-language support: English and Arabic translations with RTL support.
+Mehak is a Flutter-based data analysis and AI application designed to help users evaluate real estate parcels and determine optimal business placements.
+It intelligently quantifies the economic and spatial value of a location using data fusion and machine learning.
 
-Project structure:
+✨ Goal Features of the project
+🧠 Smart Site Suitability
 
-The repository is a Flutter app organized by features and shared common code. Below is an expanded tree of the most relevant directories and a short description.
+AI-driven recommendations for the most suitable business categories for a given parcel (e.g., retail, café, clinic, co-working space).
 
-Top-level
-- `lib/main.dart` — App entry, app-level routing and initial bindings.
-- `assets/` — Static assets (images, svg, fonts, translations).
+💰 Value Indicators
 
-Shared/common
-- `lib/common/` — App-wide utilities, theming, context extensions and small reusable widgets.
-  - `app_theme.dart` — Theme definitions (colors, text styles).
-  - `context_extension.dart` — Shortcuts for BuildContext (padding, sizes, locale helpers).
-  - `widget/` — Reusable UI widgets (generic form fields, input controls).
+Get numeric and visual indicators estimating:
 
-Feature modules
-The codebase follows a feature-first layout under `lib/feature/`. Each feature generally contains `screen/`, `widget/`, and optional `controller/` folders.
+Footfall Score
 
-- `lib/feature/boarding/`
-  - `screen/boarding_screen.dart` — Onboarding flow screens and logic.
-  - `widget/intro_card.dart` — UI card used in onboarding pages.
+Revenue Potential Index
 
-- `lib/feature/logo/`
-  - `screen/splash_screen.dart` — Splash / logo animation entry screen.
-  - `widget/` — Several small logo widgets and a `controller/` used for animation/timing.
+Visibility Score
 
-- `lib/feature/login/`
-  - `screen/login_screen.dart`, `screen/otp_screen.dart` — Login and OTP verification flows.
-  - `widget/` — Reusable login widgets: text fields, phone/OTP inputs and buttons.
+Accessibility Index
 
-- `lib/feature/navigation/`
-  - `screen/navigation_screen.dart` — Main navigation / shell for the app.
-  - `controller/navigation_controller.dart` — Navigation state and tab management.
+🗺️ Interactive Maps
 
-- `lib/feature/home/`
-  - `screen/home_screen.dart` — Main map-based exploration UI.
-  - `controller/estate_cards.dart`, `controller/overlay_control.dart` — Controllers for cards and overlay state.
-  - `widget/custom_google_map.dart` — Map integration and overlays.
-  - `widget/estate_card.dart`, `widget/estate_card_shimmer.dart` — Cards that show parcel/estate summaries and loading shimmer.
-  - `widget/filter.dart`, `widget/search.dart` — Search and filter UI components.
-  - `widget/scrollable_sheet.dart` — Bottom sheet used to surface details and card lists.
+Explore properties on a map-based UI
 
-- `lib/feature/card_details/`
-  - `screen/card_details_screen.dart` — Detailed view for a single parcel or listing.
+View surrounding points of interest (POIs)
 
-- `lib/feature/chat/`
-  - `screen/chat_screen.dart`, `screen/messages_screen.dart` — Chat UI and message list screens.
-  - `widget/chat_app_bar.dart`, `widget/chat_container.dart`, `widget/message_card.dart` — Chat UI components.
+Toggle indicator overlays for deeper insights
 
-- `lib/feature/favorite/`
-  - `screen/favorite_screen.dart` — Saved / bookmarked parcels.
-  - `widget/favorite_app_bar.dart` — Header for favorites screen.
+🔍 Data Fusion
 
-- `lib/feature/account/`
-  - `screen/account_screen.dart` — Account settings and profile UI.
-  - `widget/account_app_bar.dart` — App bar for account screens.
+Combines spatial data, demographics, POIs, and local amenities for robust and context-aware recommendations.
 
+🌐 Multi-language Support
 
-Where to look for common tasks (quick links)
-- Map & overlays: `lib/feature/home/widget/custom_google_map.dart`
-- Estate cards & card logic: `lib/feature/home/widget/estate_card.dart`, `lib/feature/home/controller/estate_cards.dart`
-- Onboarding & splash: `lib/feature/logo/screen/splash_screen.dart`, `lib/feature/boarding/screen/boarding_screen.dart`
-- Auth & OTP: `lib/feature/login/screen/login_screen.dart`, `lib/feature/login/screen/otp_screen.dart`
+Supports English 🇬🇧 and Arabic (RTL) 🇸🇦 for a global audience.
 
-This layout keeps UI, state, and small controllers collocated by feature which simplifies navigation and makes it easier to add or remove features without affecting unrelated code.
+📁 Project Structure Overview
 
-Quick start
+The repository follows a feature-first architecture, keeping UI, logic, and controllers together for better scalability.
 
-Prerequisites
-- Flutter SDK (stable)
-- Android Studio / Xcode for platform builds
+🔹 Top Level
+lib/main.dart        # App entry point
+assets/              # Static assets (images, SVGs, fonts, translations)
 
-Install dependencies and run:
+🔹 Shared / Common Code
+lib/common/
+├── app_theme.dart          # Theme definitions (colors, text styles)
+├── context_extension.dart  # BuildContext shortcuts
+└── widget/                 # Reusable widgets (buttons, form fields, etc.)
 
-```powershell
+🔹 Feature Modules
+
+Each feature has its own folder under lib/feature/, with subfolders for screen/, widget/, and optional controller/.
+
+Feature	Description	Key Files
+🏁 Logo / Splash	App entry animation	feature/logo/screen/splash_screen.dart
+🚀 Onboarding	Introduction flow	feature/boarding/screen/boarding_screen.dart
+🔐 Login & OTP	Authentication flow	feature/login/screen/login_screen.dart, otp_screen.dart
+🗺️ Home / Map	Core map-based experience	feature/home/screen/home_screen.dart, custom_google_map.dart
+📋 Estate Cards	Parcel summary & detail cards	estate_card.dart, estate_card_shimmer.dart
+💬 Chat	User messaging interface	feature/chat/screen/chat_screen.dart
+❤️ Favorites	Saved parcels	feature/favorite/screen/favorite_screen.dart
+👤 Account	Profile & settings	feature/account/screen/account_screen.dart
+⚡ Quick Start Guide
+🧩 Prerequisites
+
+Flutter SDK (Stable)
+
+Android Studio / Xcode for building & running the app
+
+🌀 Clone the Repository
+# Clone the project
+git clone https://github.com/faisal-sa/hackathon_project.git
+
+# Move into project directory
+cd hackathon_project
+
+# Get all dependencies
 flutter pub get
+
+# Run the app
 flutter run
-```
 
-## Demo
+🎯 Where to Find What
+Task	File Path
+🗺️ Map & overlays	lib/feature/home/widget/custom_google_map.dart
+🏠 Estate cards & logic	lib/feature/home/widget/estate_card.dart, lib/feature/home/controller/estate_cards.dart
+🧭 Navigation & tabs	lib/feature/navigation/controller/navigation_controller.dart
+💬 Chat UI	lib/feature/chat/widget/message_card.dart
+👤 Account & settings	lib/feature/account/screen/account_screen.dart
+🧩 Tech Stack
+Category	Technology
+🖥️ Frontend	Flutter
+🧠 AI / ML	TensorFlow / PyTorch (integrated models)
+🗺️ Maps	Google Maps API
+🗃️ Data	Spatial, demographic, and POI datasets
+🌍 Localization	Flutter Intl with RTL support
+🧪 Demo
 
+(Coming soon: Screenshots, demo video, or GIF preview of app interactions.)
 
+🧑‍💻 Project Name
 
-
-
-
-
-
-Project name: Mehak
+Mehak — Real Estate Data Analysis & AI
