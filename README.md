@@ -69,10 +69,10 @@ Each feature has its own folder under `lib/feature/`, with subfolders for `scree
 ### Clone the repository
 ```bash
 # Clone the project
-git clone https://github.com/faisal-sa/hackathon_project.git
+git clone https://github.com/faisal-sa/Mehak.git
 
 # Move into project directory
-cd hackathon_project
+cd Mehak
 
 # Get all dependencies
 flutter pub get
