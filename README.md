@@ -95,7 +95,7 @@ flutter run
 
 ---
 
-## Tech Stack
+## Future Tech Stack to be implemented
 
 | Category | Technology |
 |---|---|
@@ -109,7 +109,7 @@ flutter run
 
 ## Demo
 
-(Coming soon: Screenshots, demo video, or GIF preview of app interactions.)
+https://github.com/user-attachments/assets/f8107986-2b82-4138-9494-f1ca3783561c
 
 ---
 
